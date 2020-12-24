@@ -1,5 +1,10 @@
 //import using require
 const express = require('express');
+const mongoose = require('mongoose');
+const Blog = require('./models/user');
+
+
+const dbURI = "mongodb+srv://netninja:TeroTero@netninja.krkpa.mongodb.net/node-tuts?retryWrites=true&w=majority";
 
 //express app (instanciate)
 const app = express();
