@@ -1,0 +1,26 @@
+{
+  "name": "node-tutorial",
+  "version": "1.0.0",
+  "description": "node-js tutorial for beginners using express",
+  "main": "app.js",
+  "dependencies": {
+    "expess": "^0.0.1-security",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/akash-adhikary/node-tutorial"
+  },
+  "keywords": [
+    "node.js",
+    "Express",
+    "Tutorial",
+    "Server"
+  ],
+  "author": "Akash Adhikary",
+  "license": "MIT"
+}
