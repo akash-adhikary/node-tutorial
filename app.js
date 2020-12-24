@@ -21,9 +21,9 @@ app.get('/', (req, res) => {
   res.render('login');
 });
 
-app.get('/home', (req, res) => {
-  res.render('home',{ email: 'Akash Adhikary'});
-});
+// app.get('/home', (req, res) => {
+//   res.render('home',{ email: 'Akash Adhikary'});
+// });
 
 app.post('/home', (req, res) => {
     res.render('home', { email: req.body.email , password:req.body.password });
