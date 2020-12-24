@@ -35,27 +35,16 @@ app.get('/', (req, res) => {
 // });
 
 app.post('/home', (req, res) => {
-    res.render('home', { email: req.body.email , password:req.body.password });
+    // res.render('home', { email: req.body.email , password:req.body.password });
     console.log(req.body);
-    //
-    // user.find({ email: 'akash.adhikary@hotmail.com'}, function (err, docs) { 
-    //   if (err){ 
-    //       console.log(err); 
-    //   } 
-    //   else{ 
-    //       console.log("First function call : ", docs); 
-    //   } 
-    // }); 
-    // 
+   
 
-    user.find({ email: req.body.email})
-    .then(result => {
-      // res.render('details', { blog: result, title: 'Blog Details' });
-      console.log(2);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+    
+  user.findOne({ 'email': 'akash.adhikary@hotmail.com' }, 'name email password', function (err, user) {
+  if (err) return handleError(err);
+  console.log('%s %s', user.email, user.name);
+  res.render('home', { email: user.name})
+});
 
 
   });
