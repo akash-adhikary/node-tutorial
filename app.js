@@ -42,8 +42,19 @@ app.post('/home', (req, res) => {
     
   user.findOne({ 'email': 'akash.adhikary@hotmail.com' }, 'name email password', function (err, user) {
   if (err) return handleError(err);
-  console.log('%s %s', user.email, user.name);
-  res.render('home', { email: user.name})
+  console.log('%s %s', user.email, user.name, user.password,req.body.Password);
+
+  if(user.password==req.body.Password)
+  {
+    console.log("logged in");
+    res.render('home', { email: user.name});
+  }
+  else
+  {
+    console.log("Cannot logg in");
+    res.redirect('/404');
+  }
+  
 });
 
 
