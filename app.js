@@ -27,9 +27,16 @@ app.set('view engine', 'ejs');
 
 //routes
 app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
+app.get('/login', (req, res) => {
   res.render('login');
 });
 
+app.get('/signup', (req, res) => {
+  res.render('sign-up');
+});
 // app.get('/home', (req, res) => {
 //   res.render('home',{ email: 'Akash Adhikary'});
 // });
