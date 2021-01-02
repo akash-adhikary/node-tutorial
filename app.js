@@ -37,6 +37,9 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('sign-up');
 });
+app.post('/submit-data', (req, res) => {
+  console.log(req.body);
+});
 // app.get('/home', (req, res) => {
 //   res.render('home',{ email: 'Akash Adhikary'});
 // });
