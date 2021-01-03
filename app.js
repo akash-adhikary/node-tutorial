@@ -37,9 +37,21 @@ app.get('/login', (req, res) => {
 app.get('/signup', (req, res) => {
   res.render('sign-up');
 });
+
 app.post('/submit-data', (req, res) => {
   console.log(req.body);
+  const blog = new user(req.body);
+
+  blog.save()
+    .then(result => {
+      res.redirect('/Login');
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
+
+
 // app.get('/home', (req, res) => {
 //   res.render('home',{ email: 'Akash Adhikary'});
 // });
@@ -50,11 +62,11 @@ app.post('/home', (req, res) => {
    
 
     
-  user.findOne({ 'email': 'akash.adhikary@hotmail.com' }, 'name email password', function (err, user) {
+  user.findOne({ 'email': req.body.email }, 'name email Password', function (err, user) {
   if (err) return handleError(err);
-  console.log('%s %s', user.email, user.name, user.password,req.body.Password);
+  console.log( user.email, user.name, user.Password,req.body.Password);
 
-  if(user.password==req.body.Password)
+  if(user.Password==req.body.Password)
   {
     console.log("logged in");
     res.render('home', { email: user.name});
