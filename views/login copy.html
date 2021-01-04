@@ -6,24 +6,12 @@
   <link href="teroicon.png" rel="icon" type="image/png" />
   <title>TERO | Login</title>
   <link rel="stylesheet" href="/style.css">
-  <% if(alertMessage =='1') { %>
-   <script>alert("User not Found")
-  window.location.href='/Login';
-  </script>
-  <% } %>
-  <% if(alertMessage =='2') { %>
-    <script>alert("Incorrect Password");
-    window.location.href='/Login';
-    </script>
-  <% } %>
+
+    
+
   
-   
 </head>
 <body>
-  
-  <script>
-    showAlert();
-  </script>
   <div class="form">
     <form action="/login" method="POST">
       <img src="teroicon.png" alt="Italian Trulli">                       
@@ -34,5 +22,21 @@
     </form>
   </div>
 </body>
+<script type="text/javascript">
+   
+  function showAlert(err) {
+    var error = document.getElementById('mydiv');
+    alert(error);
+    if(error!=null)
+    {
+      alert(error);
+    }
+    else
+    {
+      alert("login");
+    }
+    
+  }
+</script> 
 </html>
 

@@ -31,7 +31,24 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('login');
+  var passedVariable = req.query.valid;
+  console.log(passedVariable);
+  if(typeof passedVariable === 'undefined')
+  {
+    res.render('login',{alertMessage:"0"});
+  }
+  else if(passedVariable==="User Not Found")
+  {
+    console.log(passedVariable);
+    res.render('login',{alertMessage:"1"});
+  }
+  else if(passedVariable==="Username Password Mismatch")
+  {
+    console.log(passedVariable);
+    res.render('login',{alertMessage:"2"});
+  }
+  
+  // console.log(passedVariable);
 });
 
 app.get('/signup', (req, res) => {
@@ -56,26 +73,45 @@ app.post('/submit-data', (req, res) => {
 //   res.render('home',{ email: 'Akash Adhikary'});
 // });
 
-app.post('/home', (req, res) => {
+app.post('/login', (req, res) => {
     // res.render('home', { email: req.body.email , password:req.body.password });
     console.log(req.body);
    
 
     
   user.findOne({ 'email': req.body.email }, 'name email Password', function (err, user) {
-  if (err) return handleError(err);
-  console.log( user.email, user.name, user.Password,req.body.Password);
-
-  if(user.Password==req.body.Password)
-  {
-    console.log("logged in");
-    res.render('home', { email: user.name});
+  if (err) {
+    console.log("user not found");
+    return handleError(err);
   }
   else
-  {
-    console.log("Cannot logg in");
-    res.redirect('/404');
+  { 
+
+    if(user === null)
+    {
+      console.log("user not found");
+      var string = encodeURIComponent('User Not Found');
+      res.redirect('/login?valid=' + string);
+      //res.redirect('/login');
+    }
+    else
+    {
+      console.log( user.email, user.name, user.Password,req.body.Password);
+
+      if(user.Password==req.body.Password)
+      {
+        console.log("logged in");
+        res.render('home', { email: user.name});
+      }
+      else
+      {
+        console.log("Cannot logg in");
+        var string = encodeURIComponent('Username Password Mismatch');
+        res.redirect('/login?valid=' + string);
+      }
+    }
   }
+  
   
 });
 
