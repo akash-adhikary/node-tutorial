@@ -8,6 +8,7 @@ mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
   .catch(err => console.log(err));
 //express app (instanciate)
 const app = express();
+app.set('trust proxy', 1) // trust first proxy
 //satic files directory
 app.use(express.static('public'));
 // middleware & static files

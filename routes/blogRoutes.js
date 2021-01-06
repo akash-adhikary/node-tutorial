@@ -1,10 +1,33 @@
 const express = require('express');
 const router = express.Router();
 const user = require('../models/user');
+var session = require('express-session');
+
+router.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
+var sess;
 
 //routes
-router.get('/', (req, res) => {
+  router.get('/', (req, res) => {
     res.redirect('/login');
+  });
+
+  router.get('/home', (req, res) => {
+    //sess = req.session;
+    if(sess)
+    {
+      console.log(sess.name);
+      res.render('home',{name: sess.name});
+    }
+    else
+    {
+      res.redirect('/login');
+    }
+    
   });
   
   router.get('/login', (req, res) => {
@@ -64,8 +87,14 @@ router.get('/', (req, res) => {
   
               if(user.Password==req.body.Password)
               {
+                sess = req.session;
+                console.log(user.name);
+                sess.name=user.name;
+                console.log(sess.name);
                 console.log("logged in");
-                res.render('home', { email: user.name});
+                res.redirect('/home');
+                // app.set('trust proxy', 1) // trust first proxy
+                // sess.name=user.name;
               }
               else
               {
@@ -80,6 +109,15 @@ router.get('/', (req, res) => {
   
   
     });
+
+router.get('/logout',(req,res) => {
+  req.session.destroy((err) => {
+      if(err) {
+          return console.log(err);
+      }
+      res.redirect('/');
+  });
+});
   
   // redirects
   router.get('/profile', (req, res) => {
@@ -90,6 +128,9 @@ router.get('/', (req, res) => {
   router.use((req, res) => {
     res.status(404).render('404');
   });
+
+
+  
 
   module.exports = router;
 

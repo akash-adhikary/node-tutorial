@@ -4,9 +4,11 @@
   "description": "node-js tutorial for beginners using express",
   "main": "app.js",
   "dependencies": {
+    "cookie-parser": "^1.4.5",
     "ejs": "^3.1.5",
     "expess": "^0.0.1-security",
     "express": "^4.17.1",
+    "express-session": "^1.17.1",
     "mongoose": "^5.11.8"
   },
   "devDependencies": {},
