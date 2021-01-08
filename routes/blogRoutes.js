@@ -3,13 +3,7 @@ const router = express.Router();
 const user = require('../models/user');
 var session = require('express-session');
 
-router.use(session({
-  secret: 'keyboard cat',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
-}))
-var sess;
+router.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
 
 //routes
   router.get('/', (req, res) => {
@@ -17,8 +11,8 @@ var sess;
   });
 
   router.get('/home', (req, res) => {
-    //sess = req.session;
-    if(sess)
+    sess = req.session;
+    if(sess.name)
     {
       console.log(sess.name);
       res.render('home',{name: sess.name});
@@ -87,7 +81,7 @@ var sess;
   
               if(user.Password==req.body.Password)
               {
-                sess = req.session;
+                var sess = req.session;
                 console.log(user.name);
                 sess.name=user.name;
                 console.log(sess.name);
@@ -111,8 +105,10 @@ var sess;
     });
 
 router.get('/logout',(req,res) => {
+
   req.session.destroy((err) => {
       if(err) {
+        res.redirect('/');
           return console.log(err);
       }
       res.redirect('/');
