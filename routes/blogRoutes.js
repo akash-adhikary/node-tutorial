@@ -58,7 +58,6 @@ router.use(session({secret: 'ssshhhhh',saveUninitialized: true,resave: true}));
       });
   });
   
-  
   router.post('/login', (req, res) => {
     user.findOne({ 'email': req.body.email }, 'name email Password', function (err, user) 
     {
@@ -124,9 +123,6 @@ router.get('/logout',(req,res) => {
   router.use((req, res) => {
     res.status(404).render('404');
   });
-
-
-  
 
   module.exports = router;
 
